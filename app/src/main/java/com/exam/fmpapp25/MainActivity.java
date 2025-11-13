@@ -31,7 +31,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String API_KEY = "demo";
+    private static final String API_KEY = "";
     private final View.OnClickListener localListener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void makeRequest(String ticker){
-        // https://financialmodelingprep.com/api/v3/quote/AAPL?apikey=demo
-        ANRequest req = AndroidNetworking.get("https://financialmodelingprep.com/api/v3/quote/{ticker}")
+        // https://financialmodelingprep.com/stable/quote?symbol=AAPL&apikey=demo
+        ANRequest req = AndroidNetworking.get("https://financialmodelingprep.com/stable/quote")
                 .addPathParameter("ticker", ticker)
                 .addQueryParameter("apikey", API_KEY)
                 .setPriority(Priority.LOW)
@@ -87,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(ANError anError) {
                 // handle error
+                Log.i("ERR", req.getUrl());
+                Log.i("ERR",anError.getErrorDetail());
+                Log.i("ERR", anError.getErrorBody());
+                Log.i("ERR", anError.getErrorCode()+"");
+                Log.i("ERR", anError.getResponse().toString());
                 Toast.makeText(getApplicationContext(),"Error on getting data ", Toast.LENGTH_LONG).show();
             }
         });
