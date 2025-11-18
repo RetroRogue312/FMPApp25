@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     ((TextView) findViewById(R.id.priceAvg50Text)).setText(String.format(Locale.US,"%.2f", quote.getPriceAvg50()));
                     ((TextView) findViewById(R.id.dayRangeText)).setText(dayRange);
                     ((TextView) findViewById(R.id.yearRangeText)).setText(yearRange);
-                    ((TextView) findViewById(R.id.epsText)).setText(String.format(Locale.US,"%.3f", quote.getEps()));
-                    ((TextView) findViewById(R.id.sharesText)).setText(quote.getSharesOutstanding());
                     ((TextView) findViewById(R.id.earningsText)).setText(date.toString());
                     String toastText = "A share of " + quote.getName() + "is currently at $" + quote.getPrice();
                     Toast.makeText(getApplicationContext(),toastText, Toast.LENGTH_LONG).show();
@@ -92,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("ERR", anError.getErrorBody());
                 Log.i("ERR", anError.getErrorCode()+"");
                 Log.i("ERR", anError.getResponse().toString());
-                Toast.makeText(getApplicationContext(),"Error on getting data ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), anError.getErrorDetail(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), req.getUrl(), Toast.LENGTH_LONG).show();
             }
         });
     }
